@@ -7,11 +7,12 @@ import java.awt.Insets;
 import javax.swing.JPanel;
 
 public class BeamPlane extends JPanel {
-	static final int FADE_COUNT = 4;
-	static final int MAX_STEPS = 135;
+	static final int FADE_COUNT = 30;
+	static final int MAX_STEPS = 180;
 	static double coeff = Math.PI / 180.0d;
 
-	private Color currentFadeColor;
+	static final Color[] FADE_COLORS = Utils.getFadingColors(Display.BEAM_COLOR.darker(), FADE_COUNT, 0.1f);
+	
 	private int angleStep;
 	private int currentAngle;
 	private Display display;
@@ -30,8 +31,7 @@ public class BeamPlane extends JPanel {
 
 		Color oldColor = g.getColor();
 		int radius = display.getRadius();
-		currentFadeColor = Display.BEAM_COLOR;
-		g.setColor(currentFadeColor);
+		g.setColor(Display.BEAM_COLOR);
 		int startOffsetX = 0;
 		int startOffsetY = 0;
 		Insets ins = getInsets();
@@ -48,7 +48,6 @@ public class BeamPlane extends JPanel {
 		int x = (int)Math.round((double)w * Math.cos(coeff * currentAngle));
 		int y = (int)Math.round((double)w * Math.sin(coeff * currentAngle));
 		g.drawLine(centerX, centerY - 1, centerX + x, centerY - y - 1);
-		currentFadeColor = currentFadeColor.darker(); 
 		int fadeAngle = currentAngle; 
 		w = 2 * Math.max(width, height);
 		startOffsetX += (width - w) / 2;
@@ -58,9 +57,8 @@ public class BeamPlane extends JPanel {
 			if (fadeAngle < 0) {
 				break;
 			}
-			g.setColor(currentFadeColor);
+			g.setColor(FADE_COLORS[i]);
 			g.fillArc(startOffsetX, startOffsetY, w, w, fadeAngle, angleStep);
-			currentFadeColor = currentFadeColor.darker(); 
 		}
 		g.setColor(oldColor);
 	}

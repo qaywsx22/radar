@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 public class SweepUnit {
-	static final int DISPLAY_REFRESH_INTERVAL = 75;
+	static final int DISPLAY_REFRESH_INTERVAL = 50;
 
 	private Timer displayRefreshTimer;
 	private Display display;
