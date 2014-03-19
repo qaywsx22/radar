@@ -1,7 +1,6 @@
 package moe.radar;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,7 +9,6 @@ import javax.swing.JFrame;
 import javax.swing.JToolBar;
 
 public class Radar  implements ActionListener {
-	private static final Dimension INIT_FRAME_SIZE = new Dimension(980, 720);
 	static final boolean debug = true;
 	
 	private Display display;
@@ -36,7 +34,7 @@ public class Radar  implements ActionListener {
 		exit.addActionListener(sonar);
 		tb.add(exit);
 		sonar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		sonar.setSize(INIT_FRAME_SIZE);
+		sonar.setSize(Settings.INIT_FRAME_SIZE);
 		sonar.getContentPane().setLayout(new BorderLayout());
 		sonar.getContentPane().add(d, BorderLayout.CENTER);
 		sonar.getContentPane().add(tb, BorderLayout.NORTH);

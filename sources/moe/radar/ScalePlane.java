@@ -22,7 +22,7 @@ public class ScalePlane extends JPanel {
 		int height = getHeight();
 
 		Color oldColor = g.getColor();
-		g.setColor(Display.LINE_COLOR);
+		g.setColor(Settings.LINE_COLOR);
 
 		int centerX = width / 2;
 		int centerY = height; 
@@ -36,22 +36,22 @@ public class ScalePlane extends JPanel {
 			startOffsetY = ins.top;
 		}
 		int radius = display.getRadius();
-		int step = radius / Display.CIRCLE_COUNT;
+		int step = radius / Settings.CIRCLE_COUNT;
 		int w = 2 * radius;
 	
 		startOffsetX += (width - w) / 2;
 		startOffsetY += height - radius;
 		
-		for (int i = 0; i < Display.CIRCLE_COUNT; i++) {
+		for (int i = 0; i < Settings.CIRCLE_COUNT; i++) {
 			g.drawArc(i * step + startOffsetX, i * step + startOffsetY, w - i * 2 * step, 2 * (radius - i * step), 0, 180);
 		}
 
-		double sectorAngle = Math.PI / (2.0d *(double)Display.SECTOR_COUNT);
-		for (int i = 0; i<= Display.SECTOR_COUNT; i++) {
+		double sectorAngle = Math.PI / (2.0d *(double)Settings.SECTOR_COUNT);
+		for (int i = 0; i<= Settings.SECTOR_COUNT; i++) {
 			int x = (int)Math.round((double)radius * Math.cos((double)i * sectorAngle));
 			int y = (int)Math.round((double)radius * Math.sin((double)i * sectorAngle));
 			g.drawLine(centerX, centerY - 1, centerX + x, centerY - y - 1);
-			if (i < Display.SECTOR_COUNT) {
+			if (i < Settings.SECTOR_COUNT) {
 				g.drawLine(centerX, centerY - 1, centerX - x, centerY - y - 1);
 			}
 		}

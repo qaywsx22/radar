@@ -20,11 +20,11 @@ public class TargetPlane extends JPanel {
 		int height = getHeight();
 
 		Color oldColor = g.getColor();
-		g.setColor(Display.BEAM_COLOR);
+		g.setColor(Settings.BEAM_COLOR);
 		int centerX = width / 2;
 		int centerY = height; 
 		int radius = display.getRadius();
-		double sectorAngle = Math.PI / (2.0d *(double)Display.SECTOR_COUNT);
+		double sectorAngle = Math.PI / (2.0d *(double)Settings.SECTOR_COUNT);
 		Pulse[] displayBuffer = display.getDisplayBuffer();
 		for (int i=0; i<displayBuffer.length; i++) {
 			Pulse p = displayBuffer[i];
@@ -32,10 +32,10 @@ public class TargetPlane extends JPanel {
 				if (p.distance > radius) {
 					continue;
 				}
-				sectorAngle = (Math.PI * (double)p.angle)/ 180.0d;
+				sectorAngle = Settings.COEFF * (double)p.angle;
 				int x = (int)Math.round((double)p.distance * Math.cos(sectorAngle));
 				int y = (int)Math.round((double)p.distance * Math.sin(sectorAngle));
-				g.fillOval(x + centerX, centerY - y, Display.TARGET_POINT_DIAMETER, Display.TARGET_POINT_DIAMETER);
+				g.fillOval(x + centerX, centerY - y, Settings.TARGET_POINT_DIAMETER, Settings.TARGET_POINT_DIAMETER);
 			}
 		}
 		g.setColor(oldColor);

@@ -37,22 +37,7 @@ import javax.swing.border.Border;
 import javax.swing.text.DefaultCaret;
 
 public class ControlPanel extends JPanel  implements SerialPortEventListener {
-	private static final int INIT_STEP_VALUE = 10;
-	private static final int INIT_SEQUENCE_LENGTH = 2;
-	//the timeout value for connecting with the port
-	private final static int TIMEOUT = 2000;	
-    //some ascii values for for certain things
-	private final static int B_ASCII = 66;
-	private final static int C_ASCII = 67;
-	private final static int F_ASCII = 70;
-	private final static int M_ASCII = 77;
-	private final static int S_ASCII = 83;
-//	private final static int TAB_ASCII = 9;
-	private final static int HASH_ASCII = 35;
-	private final static int END_MARK = 255;
-	private final static int NEW_LINE_ASCII = 10;
 	static final boolean debug = false;
-
     // move controls
 	private JButton stepLeft;
 	private JButton stepRight;
@@ -368,12 +353,12 @@ public class ControlPanel extends JPanel  implements SerialPortEventListener {
 
 		labSV = new JLabel("Step value");
 
-		stepValue = new JSpinner(new SpinnerNumberModel(INIT_STEP_VALUE, 1, 180, 1));
+		stepValue = new JSpinner(new SpinnerNumberModel(Settings.INIT_STEP_VALUE, 1, 180, 1));
 
 		labSL = new JLabel("Sequence length");
 
 		// value 0 means sequence runs continuous
-		sequenceLength = new JSpinner(new SpinnerNumberModel(INIT_SEQUENCE_LENGTH, 0, Short.MAX_VALUE, 1));
+		sequenceLength = new JSpinner(new SpinnerNumberModel(Settings.INIT_SEQUENCE_LENGTH, 0, Short.MAX_VALUE, 1));
 		
 		parameterBox = new JPanel();
 	}
@@ -471,7 +456,7 @@ public class ControlPanel extends JPanel  implements SerialPortEventListener {
 
         try {
             //the method below returns an object of type CommPort
-            commPort = selectedPortIdentifier.open("Radar", TIMEOUT);
+            commPort = selectedPortIdentifier.open("Radar", Settings.TIMEOUT);
             //the CommPort object can be casted to a SerialPort object
             serialPort = (SerialPort)commPort;
             connected = true;
@@ -549,21 +534,21 @@ public class ControlPanel extends JPanel  implements SerialPortEventListener {
 
     public void doStep(boolean rights) {
         try {
-          output. write(S_ASCII);
+          output. write(Settings.S_ASCII);
           if (rights) {
-              output. write(B_ASCII);
+              output. write(Settings.B_ASCII);
           }
           else {
-              output.write(F_ASCII);
+              output.write(Settings.F_ASCII);
           }
-          output. write(HASH_ASCII);
+          output. write(Settings.HASH_ASCII);
           String step = ((Integer)stepValue.getValue()).toString();
           for (int i=0; i < step.length(); i++) {
         	  byte digit = (byte)step.charAt(i);
               output. write(digit);
           }
 //          output. write(step);
-          output. write(END_MARK);
+          output. write(Settings.END_MARK);
           output.flush();
       }
       catch (Exception e) {
@@ -573,21 +558,21 @@ public class ControlPanel extends JPanel  implements SerialPortEventListener {
 
     public void doCycle(boolean rights) {
         try {
-          output. write(C_ASCII);
+          output. write(Settings.C_ASCII);
           if (rights) {
-              output. write(B_ASCII);
+              output. write(Settings.B_ASCII);
           }
           else {
-              output.write(F_ASCII);
+              output.write(Settings.F_ASCII);
           }
-          output. write(HASH_ASCII);
+          output. write(Settings.HASH_ASCII);
           String step = ((Integer)stepValue.getValue()).toString();
           for (int i=0; i < step.length(); i++) {
         	  byte digit = (byte)step.charAt(i);
               output. write(digit);
           }
 //          output. write(step);
-          output. write(END_MARK);
+          output. write(Settings.END_MARK);
           output.flush();
       }
       catch (Exception e) {
@@ -597,10 +582,10 @@ public class ControlPanel extends JPanel  implements SerialPortEventListener {
 
     public void doMeasure() {
         try {
-            output. write(M_ASCII);
-            output. write(S_ASCII);
-            output. write(HASH_ASCII);
-            output. write(END_MARK);
+            output. write(Settings.M_ASCII);
+            output. write(Settings.S_ASCII);
+            output. write(Settings.HASH_ASCII);
+            output. write(Settings.END_MARK);
             output.flush();
         }
         catch (Exception e) {
@@ -634,7 +619,7 @@ public class ControlPanel extends JPanel  implements SerialPortEventListener {
             try {
                 byte singleData = (byte)input.read();
 
-                if (singleData != NEW_LINE_ASCII) {
+                if (singleData != Settings.NEW_LINE_ASCII) {
                     String logText = new String(new byte[] {singleData});
                     log.append(logText);
                 }
