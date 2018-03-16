@@ -12,7 +12,7 @@ public class Settings {
 	static final Color BEAM_COLOR = new Color(76, 229, 27);
 	static final int CIRCLE_COUNT = 5;
 	static final int SECTOR_COUNT = 4;
-	static final int TARGET_POINT_DIAMETER = 5;
+	static final int TARGET_POINT_DIAMETER = 7;
 	static final Border MARGIN = new EmptyBorder(2, 2, 2, 2);
 	static final int DISPLAY_BUFFER_LENGTH = 16;
 	static final Dimension INIT_FRAME_SIZE = new Dimension(980, 720);

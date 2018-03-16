@@ -37,7 +37,7 @@ import javax.swing.border.Border;
 import javax.swing.text.DefaultCaret;
 
 public class ControlPanel extends JPanel  implements SerialPortEventListener {
-	static final boolean debug = false;
+	static final boolean debug = true;
     // move controls
 	private JButton stepLeft;
 	private JButton stepRight;
@@ -90,7 +90,7 @@ public class ControlPanel extends JPanel  implements SerialPortEventListener {
 		setLayout(bl);
 		createControls();
 		createLayout();
-		fillPortComboBox();
+//		fillPortComboBox();
 		init();
 	}
 
