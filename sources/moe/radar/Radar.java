@@ -7,6 +7,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JToolBar;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
+import mdlaf.MaterialLookAndFeel;
 
 public class Radar  implements ActionListener {
 	static final boolean debug = true;
@@ -25,6 +29,12 @@ public class Radar  implements ActionListener {
 	 * @param args
 	 */
 	public static void main(String[] args) {
+//		try {
+//			UIManager.setLookAndFeel (new MaterialLookAndFeel());
+//		}
+//		catch (UnsupportedLookAndFeelException e) {
+//			e.printStackTrace ();
+//		}
 		Radar r = new Radar();
 		Display d = r.getDisplay();
 		MyFrame sonar = new MyFrame(r); 
